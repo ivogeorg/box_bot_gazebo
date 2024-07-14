@@ -14,12 +14,13 @@ def generate_launch_description():
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     pkg_box_bot_gazebo = get_package_share_directory('box_bot_gazebo')
 
-    # We get the whole install dir
-    # We do this to avoid having to copy or softlink manually the packages so that gazebo can find them
+    # We get the whole install dir path to avoid having to copy or  
+    # softlink manually the packages, so that gazebo can find them
     description_package_name = "box_bot_description"
     install_dir = get_package_prefix(description_package_name)
 
-    # Set the path to the WORLD model files. Is to find the models inside the models folder in box_bot_gazebo package
+    # Set the path to the WORLD model files to find 
+    # the models inside box_bot_gazebo package/models
     gazebo_models_path = os.path.join(pkg_box_bot_gazebo, 'models')
     # os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
 
