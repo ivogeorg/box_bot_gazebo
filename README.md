@@ -1,4 +1,8 @@
-### box_bot_gazebo
+### `box_bot_gazebo`
+
+#### `box_bot_description`
+
+The repository [`box_bot_description`](https://github.com/ivogeorg/box_bot_description) contains the robot model to populate in Gazebo. 
 
 #### Moments of inertia
 
