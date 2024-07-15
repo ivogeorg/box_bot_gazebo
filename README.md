@@ -58,3 +58,17 @@ These values are calculated through friction tests with elements with the same m
 | **kp** | This coefficient sets the static contact stiffness. | This determines whether the linked material is closer to marble (rigid, bigger values) or more like rubber (soft material, lower values). |
 | **kd** | This coefficient sets the dynamic contact stiffness. | This determines whether the linked material is closer to marble (rigid, bigger values) or more like rubber (soft material, lower values). It is essentially how much it deforms over a long period, exerting its pressure. |
 
+#### Launching Gazebo world and spawning Box Bot
+
+1. In terminal, launch the empty world in Gazebo:
+   1. `cd ~/ros2_ws`
+   2. `colcon build`
+   3. `source install/setup.bash`
+   4. `ros2 launch box_bot_gazebo start_world.launch.py
+2. In another terminal, spawn the robot and publish it's static transforms (Rviz also started but without the [`joint_state_publisher_gui`](https://github.com/ivogeorg/box_bot_description/blob/main/README.md#starting-rviz2-and-joint_state_publisher_gui), all links but the `base_link` and `chassis` are missing):
+   1. `cd ~/ros2_ws`
+   2. _(optional)_ `colcon build`
+   3. `source install/setup.bash`
+   4. `ros2 launch box_bot_gazebo spawn_robot_ros2_physical.launch.xml`  
+
+![Box Bot](assets/box_bot.png)  
