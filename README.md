@@ -40,5 +40,17 @@
 `source /home/simulations/ros2_sims_ws/install/setup.bash`
 `ros2 run spawn_robot_tools_pkg inertia_wizzard`
 
+#### Basic physical properties
 
+| Symbol | Definition | Explanation
+| --- | --- | --- |
+| **mu1** | The static friction coefficient. | It is how much friction there is until the object starts moving in simple terms.|
+| **mu2** | The dynamic friction coefficient. | It is how much friction there is when the object moves in simple terms. |
+
+These values are calculated through friction tests with elements with the same mass as the links you set these values to. Of course, you should also remember the materials they are made of and so on. However, in reality, it sets them with the values that make the robot behave correctly, not necessarily the real ones.
+
+| Symbol | Definition | Explanation
+| --- | --- | --- |
+| **kp** | This coefficient sets the static contact stiffness. | This determines whether the linked material is closer to marble (rigid, bigger values) or more like rubber (soft material, lower values). |
+| **kd** | This coefficient sets the dynamic contact stiffness. | This determines whether the linked material is closer to marble (rigid, bigger values) or more like rubber (soft material, lower values). It is essentially how much it deforms over a long period, exerting its pressure. |
 
