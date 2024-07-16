@@ -108,3 +108,37 @@ These values are calculated through friction tests with elements with the same m
    4. `ros2 launch box_bot_gazebo spawn_robot_ros2_physical.launch.xml`  
 
 ![Box Bot](assets/box_bot.png)  
+
+#### Publishing joint states
+
+##### Launching a joint state publisher node
+
+For example, see previous heading.
+
+##### Adding a Gazebo ROS joint state publisher plugin
+
+```
+<gazebo>
+    <plugin name="box_bot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+    <ros>
+        <remapping>~/out:=joint_states</remapping>
+    </ros>
+    <update_rate>30</update_rate>
+    <joint_name>joint_left_wheel</joint_name>
+    <joint_name>joint_right_wheel</joint_name>
+
+    <joint_name>front_yaw_joint</joint_name>
+    <joint_name>back_yaw_joint</joint_name>
+    <joint_name>front_roll_joint</joint_name>
+    <joint_name>back_roll_joint</joint_name>
+    <joint_name>front_pitch_joint</joint_name>
+    <joint_name>back_pitch_joint</joint_name>
+
+    </plugin>
+</gazebo>
+```
+
+##### Topic `/joint_states`
+
+Now Rviz2 shows all the links of the robot:  
+![Box bot with joint states](assets/box_bot_with_joint_states.png)  
