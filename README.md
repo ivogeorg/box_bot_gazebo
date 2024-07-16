@@ -161,3 +161,13 @@ Now Rviz2 shows all the links of the robot:
 
 ![Box bot moving in Rviz2](assets/box_bot_moving_in_rviz2.png)  
 ![Box bot moving in Gazebo](assets/box_bot_moving_in_gazebo.png)  
+
+#### ROS2 Control in Gazebo
+
+[`ros2_control`](https://control.ros.org/rolling/index.html) is a powerful package for robot control in ROS 2.
+
+A small example of using it is shown with a scanner which can be moving "in and out of" the robot body.  
+
+![Box bot with scanner (Rviz2)](assets/box_bot_scanner_in_rviz2.png)  
+
+![Box bot with scanner (Gazebo)](assets/box_bot_scanner_in_gazebo.png)  
