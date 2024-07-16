@@ -142,3 +142,22 @@ For example, see previous heading.
 
 Now Rviz2 shows all the links of the robot:  
 ![Box bot with joint states](assets/box_bot_with_joint_states.png)  
+
+#### Moving the robot
+
+1. Add joint state publisher and differential drive plugins.
+2. Launch Gazebo and spawn the robot with /robot_description and /joint_states topics.
+   1. Start Gazebo with empty world:
+      `cd ~/ros2_ws`
+      `colcon build`
+      `source install/setup.bash`
+      `ros2 launch box_bot_gazebo start_world.launch.py`
+   2. Spawn the robot and publish to topics
+      `cd ~/ros2_ws`
+      `source install/setup.bash`
+      `ros2 launch box_bot_gazebo spawn_robot_ros2_control.launch.xml`      
+3. Teleoperate with keyboard.
+   `ros2 run teleop_twist_keyboard teleop_twist_keyboard`
+
+![Box bot moving in Rviz2](assets/box_bot_moving_in_rviz2.png)  
+![Box bot moving in Gazebo](assets/box_bot_moving_in_gazebo.png)  
