@@ -166,6 +166,8 @@ Now Rviz2 shows all the links of the robot:
 
 [`ros2_control`](https://control.ros.org/rolling/index.html) is a powerful package for robot control in ROS 2.
 
+##### Moving scanner along z-axis
+
 A small example of using it is shown with a scanner which can be moving "in and out of" the robot body.  
 
 ![Box bot with scanner (Gazebo)](assets/box_bot_scanner_in_gazebo.png)  
@@ -204,6 +206,21 @@ A small example of using it is shown with a scanner which can be moving "in and 
 [gzserver-1] [INFO] [1721169439.206844094] [controller_manager]: Configuring controller 'joint_state_broadcaster'
 [gzserver-1] [INFO] [1721169439.206992053] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
 ```
+###### `joint_trajectory_controller` action server
+**Server:**
+```
+[gzserver-1] [INFO] [1721172013.693132450] [joint_trajectory_controller]: Received new action goal
+[gzserver-1] [INFO] [1721172013.693291770] [joint_trajectory_controller]: Accepted new action goal
+[gzserver-1] [INFO] [1721172014.717216416] [joint_trajectory_controller]: Goal reached, success!
+[gzserver-1] [INFO] [1721172047.514888292] [joint_trajectory_controller]: Received new action goal
+```
+**Client:**
+```
+user:~/ros2_ws$ ros2 run box_bot_gazebo move_laser.py 0.0
+[INFO] [1721172013.727407601] [move_laser_actionclient]: Goal accepted :)
+[INFO] [1721172014.722001382] [move_laser_actionclient]: Result: control_msgs.action.FollowJointTrajectory_Result(error_code=0, error_string='')
+user:~/ros2_ws$ ros2 run box_bot_gazebo move_laser.py -0.05
+```
 
 ![Box bot with scanner (Rviz2)](assets/box_bot_scanner_in_rviz2.png)  
 ```
@@ -213,3 +230,18 @@ A small example of using it is shown with a scanner which can be moving "in and 
 [spawner-5] [INFO] [1721169439.247423035] [spawner_joint_trajectory_controller]: Configured and started joint_trajectory_controller
 ```
 
+##### Rotating the scanner around z-axis
+
+###### Sending velocity commands
+```
+user:~/ros2_ws$ ros2 topic pub --once /velocity_controller/commands std_msgs/msg/Float64MultiArray "layout:t:
+ dim: []
+ data_offset: 0
+data: [-20.0]
+"
+publisher: beginning loop
+publishing #1: std_msgs.msg.Float64MultiArray(layout=std_msgs.msg.MultiArrayLayout(dim=[], data_offset=0), data=[-20.0])
+```
+###### Simultaneous operation
+
+The vertical motion along the z-axis and the rotation around the z-axis can be controlled at the same time, the former with sending goals to an action server and the latter by sending velocity commands.
