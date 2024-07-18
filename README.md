@@ -378,7 +378,16 @@ The camera is simulated in a separate window as a fish-eye projection of the wor
 
    | Rviz2 | Gazebo |  
    | --- | --- |  
-   | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_camera_moving_rviz2.png) | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_camera_moving_gazebo.png) |
+   | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_camera_moving_rviz2.png) | ![Bot moving with scanner and point-cloud sensor (Gazebo)](assets/box_bot_scanner_point_cloud_camera_moving_gazebo.png) |
 
+
+
+##### Regular camera
+
+This camera is simulated in a separate window as a regular camera.
+
+   | Rviz2 | Gazebo |  
+   | --- | --- |  
+   | ![Bot in room (Rviz2)](assets/box_bot_room_rviz2.png) | ![Bot in room (Gazebo)](assets/box_bot_room_gazebo.png) |
 
 
