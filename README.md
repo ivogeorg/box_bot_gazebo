@@ -166,7 +166,7 @@ Now Rviz2 shows all the links of the robot:
 
 [`ros2_control`](https://control.ros.org/rolling/index.html) is a powerful package for robot control in ROS 2.
 
-##### Moving scanner along z-axis
+##### Moving scanner housing along z-axis
 
 A small example of using it is shown with a scanner which can be moving "in and out of" the robot body.  
 
@@ -230,7 +230,54 @@ user:~/ros2_ws$ ros2 run box_bot_gazebo move_laser.py -0.05
 [spawner-5] [INFO] [1721169439.247423035] [spawner_joint_trajectory_controller]: Configured and started joint_trajectory_controller
 ```
 
-##### Rotating the scanner around z-axis
+###### Interrogating the `/controller_manager` node
+
+```
+user:~$ ros2 node info /controller_manager
+/controller_manager
+  Subscribers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+  Publishers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+  Service Servers:
+    /controller_manager/configure_and_start_controller: controller_manager_msgs/srv/ConfigureStartController
+    /controller_manager/configure_controller: controller_manager_msgs/srv/ConfigureController
+    /controller_manager/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /controller_manager/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /controller_manager/get_parameters: rcl_interfaces/srv/GetParameters
+    /controller_manager/list_controller_types: controller_manager_msgs/srv/ListControllerTypes
+    /controller_manager/list_controllers: controller_manager_msgs/srv/ListControllers
+    /controller_manager/list_hardware_interfaces: controller_manager_msgs/srv/ListHardwareInterfaces
+    /controller_manager/list_parameters: rcl_interfaces/srv/ListParameters
+    /controller_manager/load_and_configure_controller: controller_manager_msgs/srv/LoadConfigureController
+    /controller_manager/load_and_start_controller: controller_manager_msgs/srv/LoadStartController
+    /controller_manager/load_controller: controller_manager_msgs/srv/LoadController
+    /controller_manager/reload_controller_libraries: controller_manager_msgs/srv/ReloadControllerLibraries
+    /controller_manager/set_parameters: rcl_interfaces/srv/SetParameters
+    /controller_manager/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+    /controller_manager/switch_controller: controller_manager_msgs/srv/SwitchController
+    /controller_manager/unload_controller: controller_manager_msgs/srv/UnloadController
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
+```
+
+####### Node info
+
+####### Service `/list_controllers`
+
+```
+user:~$ ros2 service call /controller_manager/list_controllers controller_manager_msgs/srv/ListControllers "{}"
+requester: making request: controller_manager_msgs.srv.ListControllers_Request()
+
+response:
+controller_manager_msgs.srv.ListControllers_Response(controller=[controller_manager_msgs.msg.ControllerState(name='joint_trajectory_controller', state='active', type='joint_trajectory_controller/JointTrajectoryController', claimed_interfaces=['laser_scan_link_joint/position'], required_command_interfaces=['laser_scan_link_joint/position'], required_state_interfaces=['laser_scan_link_joint/position', 'laser_scan_link_joint/velocity']), controller_manager_msgs.msg.ControllerState(name='velocity_controller', state='active', type='velocity_controllers/JointGroupVelocityController', claimed_interfaces=['laser_scan_model_link_joint/velocity'], required_command_interfaces=['laser_scan_model_link_joint/velocity'], required_state_interfaces=[]), controller_manager_msgs.msg.ControllerState(name='joint_state_broadcaster', state='active', type='joint_state_broadcaster/JointStateBroadcaster', claimed_interfaces=[], required_command_interfaces=[], required_state_interfaces=['laser_scan_link_joint/effort', 'laser_scan_link_joint/position', 'laser_scan_link_joint/velocity', 'laser_scan_model_link_joint/effort', 'laser_scan_model_link_joint/position', 'laser_scan_model_link_joint/velocity'])])
+```
+
+##### Rotating the scanner housing around z-axis
 
 ###### Sending velocity commands
 ```
@@ -245,3 +292,49 @@ publishing #1: std_msgs.msg.Float64MultiArray(layout=std_msgs.msg.MultiArrayLayo
 ###### Simultaneous operation
 
 The vertical motion along the z-axis and the rotation around the z-axis can be controlled at the same time, the former with sending goals to an action server and the latter by sending velocity commands.
+
+#### Robot sensing
+
+##### Ray-tracing laser scanner
+
+This sensor is simulated as 360 rays around a circle.
+
+1. Start Gazebo
+   ```  
+   cd ~/ros2_ws  
+   colcon build  
+   source install/setup.bash  
+   ros2 launch box_bot_gazebo start_world.launch.py  
+   ```
+2. Spawn the box bot with scanner plugin
+   ```
+   cd ~/ros2_ws
+   source install/setup.bash
+   ros2 launch box_bot_gazebo spawn_robot_ros2_sensor.launch.xml
+   ```  
+
+   | Rviz2 | Gazebo |  
+   | --- | --- |  
+   | ![Bot moving with scanner (Rviz2)](assets/box_bot_scanner_moving_rviz2.png) | ![Bot moving with scanner (Gazebo)](assets/box_bot_scanner_moving_gazebo.png) |  
+
+##### Point-cloud sensor
+
+This sensor is simulated with colored points on the reflective surfaces within its declared range.
+
+1. Start Gazebo
+   ```  
+   cd ~/ros2_ws  
+   colcon build  
+   source install/setup.bash  
+   ros2 launch box_bot_gazebo start_world.launch.py  
+   ```
+2. Spawn the box bot with scanner plugin
+   ```
+   cd ~/ros2_ws
+   source install/setup.bash
+   ros2 launch box_bot_gazebo spawn_robot_ros2_final.launch.xml
+   ```
+   | Rviz2 | Gazebo |  
+   | --- | --- |  
+   | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_moving_rviz2.png) | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_moving_gazebo.png) |
+
