@@ -371,3 +371,14 @@ ChannelFloat32[] channels
    | --- | --- |  
    | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_moving_rviz2.png) | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_moving_gazebo.png) |
 
+
+##### RGB camera
+
+The camera is simulated in a separate window as a fish-eye projection of the world.
+
+   | Rviz2 | Gazebo |  
+   | --- | --- |  
+   | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_camera_moving_rviz2.png) | ![Bot moving with scanner and point-cloud sensor (Rviz2)](assets/box_bot_scanner_point_cloud_camera_moving_gazebo.png) |
+
+
+
