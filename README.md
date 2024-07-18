@@ -393,7 +393,7 @@ This camera is simulated in a separate window as a regular camera.
 
 ###### IMU
 
-####### Node
+1. Node
 ```
 user:~$ ros2 node info /imu/bytes_imu
 /imu/bytes_imu
@@ -418,7 +418,7 @@ user:~$ ros2 node info /imu/bytes_imu
   Action Clients:
 ```
 
-####### Topic
+2. Topic
 ```
 user:~$ ros2 topic info /imu/data --verbose
 Type: sensor_msgs/msg/Imu
@@ -441,7 +441,7 @@ QoS profile:
 Subscription count: 0
 ```
 
-###### Interface
+3. Interface
 ```
 user:~$ ros2 interface show sensor_msgs/msg/Imu
 # This is a message to hold data from an IMU (Inertial Measurement Unit)
