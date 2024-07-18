@@ -391,3 +391,95 @@ This camera is simulated in a separate window as a regular camera.
    | ![Bot in room (Rviz2)](assets/box_bot_room_rviz2.png) | ![Bot in room (Gazebo)](assets/box_bot_room_gazebo.png) |
 
 
+###### IMU
+
+####### Node
+```
+user:~$ ros2 node info /imu/bytes_imu
+/imu/bytes_imu
+  Subscribers:
+    /clock: rosgraph_msgs/msg/Clock
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+  Publishers:
+    /imu/data: sensor_msgs/msg/Imu
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+  Service Servers:
+    /imu/bytes_imu/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /imu/bytes_imu/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /imu/bytes_imu/get_parameters: rcl_interfaces/srv/GetParameters
+    /imu/bytes_imu/list_parameters: rcl_interfaces/srv/ListParameters
+    /imu/bytes_imu/set_parameters: rcl_interfaces/srv/SetParameters
+    /imu/bytes_imu/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
+```
+
+####### Topic
+```
+user:~$ ros2 topic info /imu/data --verbose
+Type: sensor_msgs/msg/Imu
+
+Publisher count: 1
+
+Node name: bytes_imu
+Node namespace: /imu
+Topic type: sensor_msgs/msg/Imu
+Endpoint type: PUBLISHER
+GID: 61.74.10.01.4e.e6.2e.e3.0e.7b.d1.8d.00.00.76.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  Durability: VOLATILE
+  Lifespan: 9223372036854775807 nanoseconds
+  Deadline: 9223372036854775807 nanoseconds
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: 9223372036854775807 nanoseconds
+
+Subscription count: 0
+```
+
+###### Interface
+```
+user:~$ ros2 interface show sensor_msgs/msg/Imu
+# This is a message to hold data from an IMU (Inertial Measurement Unit)
+#
+# Accelerations should be in m/s^2 (not in g's), and rotational velocity should be in rad/sec
+#
+# If the covariance of the measurement is known, it should be filled in (if all you know is the
+# variance of each measurement, e.g. from the datasheet, just put those along the diagonal)
+# A covariance matrix of all zeros will be interpreted as "covariance unknown", and to use the
+# data a covariance will have to be assumed or gotten from some other source
+#
+# If you have no estimate for one of the data elements (e.g. your IMU doesn't produce an
+# orientation estimate), please set element 0 of the associated covariance matrix to -1
+# If you are interpreting this message, please check for a value of -1 in the first element of each
+# covariance matrix, and disregard the associated estimate.
+
+std_msgs/Header header
+        builtin_interfaces/Time stamp
+                int32 sec
+                uint32 nanosec
+        string frame_id
+
+geometry_msgs/Quaternion orientation
+        float64 x 0
+        float64 y 0
+        float64 z 0
+        float64 w 1
+float64[9] orientation_covariance # Row major about x, y, z axes
+
+geometry_msgs/Vector3 angular_velocity
+        float64 x
+        float64 y
+        float64 z
+float64[9] angular_velocity_covariance # Row major about x, y, z axes
+
+geometry_msgs/Vector3 linear_acceleration
+        float64 x
+        float64 y
+        float64 z
+float64[9] linear_acceleration_covariance # Row major x, y z
+```
