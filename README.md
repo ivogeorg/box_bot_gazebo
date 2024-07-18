@@ -321,6 +321,39 @@ This sensor is simulated as 360 rays around a circle.
 
 This sensor is simulated with colored points on the reflective surfaces within its declared range.
 
+```
+user:~$ ros2 interface show sensor_msgs/msg/PointCloud
+## THIS MESSAGE IS DEPRECATED AS OF FOXY
+## Please use sensor_msgs/PointCloud2
+
+# This message holds a collection of 3d points, plus optional additional
+# information about each point.
+
+# Time of sensor data acquisition, coordinate frame ID.
+std_msgs/Header header
+        builtin_interfaces/Time stamp
+                int32 sec
+                uint32 nanosec
+        string frame_id
+
+# Array of 3d points. Each Point32 should be interpreted as a 3d point
+# in the frame given in the header.
+geometry_msgs/Point32[] points
+        #
+        #
+        float32 x
+        float32 y
+        float32 z
+
+# Each channel should have the same number of elements as points array,
+# and the data in each channel should correspond 1:1 with each point.
+# Channel names in common practice are listed in ChannelFloat32.msg.
+ChannelFloat32[] channels
+        #
+        string name
+        float32[] values
+```
+
 1. Start Gazebo
    ```  
    cd ~/ros2_ws  
