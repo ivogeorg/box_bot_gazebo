@@ -41,7 +41,7 @@ The repository [`box_bot_description`](https://github.com/ivogeorg/box_bot_descr
 ```
 ##### Calculator
 
-`source /home/simulations/ros2_sims_ws/install/setup.bash`
+`source /home/simulations/ros2_sims_ws/install/setup.bash`   
 `ros2 run spawn_robot_tools_pkg inertia_wizzard`
 
 #### Basic physical properties
